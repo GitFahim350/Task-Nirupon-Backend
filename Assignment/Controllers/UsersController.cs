@@ -32,22 +32,23 @@ namespace Assignment.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-          if (_context.User == null)
-          {
-              return NotFound();
-          }
-            var user = await _context.User.FindAsync(id);
+        
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<User>> GetUser(int id)
+        //{
+        //  if (_context.User == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var user = await _context.User.FindAsync(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return user;
-        }
+        //    return user;
+        //}
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -110,6 +111,13 @@ namespace Assignment.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            User usr = _context.User.Where(u => u.Email == user.Email).FirstOrDefault();
+            
+            if (usr != null)
+            {
+                return NoContent();
+            }
+
             user.Password = EncryptDecryptpassword.ConvertToEncrypt(user.Password);
             if (_context.User == null)
             {

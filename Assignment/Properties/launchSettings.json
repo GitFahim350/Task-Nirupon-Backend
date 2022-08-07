@@ -10,7 +10,6 @@
   },
   "profiles": {
     "Assignment": {
-      "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
